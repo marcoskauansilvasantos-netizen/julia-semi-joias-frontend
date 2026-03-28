@@ -1,30 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import WhatsAppFloat from '../components/WhatsAppFloat';
 import ProductCard from '../components/ProductCard';
-import { mockProducts } from '../mock/mockData';
+import { productsAPI } from '../services/api';
 
 const Catalogo = () => {
   const [activeTab, setActiveTab] = useState('all');
+  const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const allProducts = [
-    ...mockProducts.novaColecao,
-    ...mockProducts.ouro10k,
-    ...mockProducts.prata925
-  ];
+  useEffect(() => {
+    loadProducts();
+  }, []);
+
+  const loadProducts = async () => {
+    try {
+      setIsLoading(true);
+      const data = await productsAPI.getAll();
+      setProducts(data);
+    } catch (error) {
+      console.error('Erro ao carregar produtos:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const getFilteredProducts = () => {
     switch (activeTab) {
       case 'nova':
-        return mockProducts.novaColecao;
+        return products.filter(p => p.category === 'NOVA COLEÇÃO');
       case 'ouro':
-        return mockProducts.ouro10k;
+        return products.filter(p => p.category === 'OURO 10K');
       case 'prata':
-        return mockProducts.prata925;
+        return products.filter(p => p.category === 'PRATA 925');
       default:
-        return allProducts;
+        return products;
     }
   };
 

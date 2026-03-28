@@ -9,12 +9,13 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { Switch } from '../../components/ui/switch';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../components/ui/tabs';
 import { Plus, LogOut, Pencil, Trash2 } from 'lucide-react';
-import { mockProducts } from '../../mock/mockData';
+import { productsAPI, authAPI, formatApiErrorDetail } from '../../services/api';
 import { toast } from 'sonner';
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState(null);
   const [formData, setFormData] = useState({
@@ -36,62 +37,87 @@ const AdminDashboard = () => {
       return;
     }
 
-    // Carregar produtos do mock
-    const allProducts = [
-      ...mockProducts.ouro10k,
-      ...mockProducts.prata925,
-      ...mockProducts.novaColecao
-    ];
-    setProducts(allProducts);
+    // Carregar produtos do backend
+    loadProducts();
   }, [navigate]);
 
-  const handleLogout = () => {
-    localStorage.removeItem('adminAuth');
-    toast.success('Logout realizado com sucesso');
-    navigate('/admin/login');
+  const loadProducts = async () => {
+    try {
+      setIsLoading(true);
+      const data = await productsAPI.getAll();
+      setProducts(data);
+    } catch (error) {
+      toast.error('Erro ao carregar produtos');
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      await authAPI.logout();
+      localStorage.removeItem('adminAuth');
+      localStorage.removeItem('adminUser');
+      toast.success('Logout realizado com sucesso');
+      navigate('/admin/login');
+    } catch (error) {
+      // Logout local mesmo se houver erro
+      localStorage.removeItem('adminAuth');
+      localStorage.removeItem('adminUser');
+      navigate('/admin/login');
+    }
   };
 
   const handleInputChange = (field, value) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
-    if (editingProduct) {
-      // Editar produto existente
-      setProducts(prev => prev.map(p => 
-        p.id === editingProduct.id 
-          ? { ...p, ...formData, price: parseFloat(formData.price), promoPrice: formData.promoPrice ? parseFloat(formData.promoPrice) : null }
-          : p
-      ));
-      toast.success('Produto atualizado com sucesso!');
-      setEditingProduct(null);
-    } else {
-      // Adicionar novo produto
-      const newProduct = {
-        id: products.length + 1,
-        ...formData,
+    try {
+      const productData = {
+        name: formData.name,
         price: parseFloat(formData.price),
         promoPrice: formData.promoPrice ? parseFloat(formData.promoPrice) : null,
+        category: formData.category,
+        image: formData.image,
+        inStock: formData.inStock,
+        featured: formData.featured,
         discount: formData.discount ? parseInt(formData.discount) : null
       };
-      setProducts(prev => [...prev, newProduct]);
-      toast.success('Produto adicionado com sucesso!');
-    }
 
-    // Resetar formulário
-    setFormData({
-      name: '',
-      price: '',
-      promoPrice: '',
-      category: 'OURO 10K',
-      image: '',
-      inStock: true,
-      featured: false,
-      discount: ''
-    });
-    setIsAddDialogOpen(false);
+      if (editingProduct) {
+        // Editar produto existente
+        await productsAPI.update(editingProduct.id, productData);
+        toast.success('Produto atualizado com sucesso!');
+        setEditingProduct(null);
+      } else {
+        // Adicionar novo produto
+        await productsAPI.create(productData);
+        toast.success('Produto adicionado com sucesso!');
+      }
+
+      // Recarregar produtos
+      await loadProducts();
+
+      // Resetar formulário
+      setFormData({
+        name: '',
+        price: '',
+        promoPrice: '',
+        category: 'OURO 10K',
+        image: '',
+        inStock: true,
+        featured: false,
+        discount: ''
+      });
+      setIsAddDialogOpen(false);
+    } catch (error) {
+      const errorMsg = formatApiErrorDetail(error.response?.data?.detail) || error.message;
+      toast.error(errorMsg);
+    }
   };
 
   const handleEdit = (product) => {
@@ -109,10 +135,16 @@ const AdminDashboard = () => {
     setIsAddDialogOpen(true);
   };
 
-  const handleDelete = (productId) => {
+  const handleDelete = async (productId) => {
     if (window.confirm('Tem certeza que deseja excluir este produto?')) {
-      setProducts(prev => prev.filter(p => p.id !== productId));
-      toast.success('Produto excluído com sucesso!');
+      try {
+        await productsAPI.delete(productId);
+        toast.success('Produto excluído com sucesso!');
+        await loadProducts();
+      } catch (error) {
+        const errorMsg = formatApiErrorDetail(error.response?.data?.detail) || error.message;
+        toast.error(errorMsg);
+      }
     }
   };
 

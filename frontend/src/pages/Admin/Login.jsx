@@ -4,7 +4,7 @@ import { Button } from '../../components/ui/button';
 import { Input } from '../../components/ui/input';
 import { Label } from '../../components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../components/ui/card';
-import { mockAdminUser } from '../../mock/mockData';
+import { authAPI, formatApiErrorDetail } from '../../services/api';
 import { toast } from 'sonner';
 
 const AdminLogin = () => {
@@ -13,21 +13,22 @@ const AdminLogin = () => {
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     setIsLoading(true);
 
-    // Simular delay de autenticação
-    setTimeout(() => {
-      if (email === mockAdminUser.email && password === mockAdminUser.password) {
-        localStorage.setItem('adminAuth', 'true');
-        toast.success('Login realizado com sucesso!');
-        navigate('/admin/dashboard');
-      } else {
-        toast.error('Email ou senha incorretos');
-      }
+    try {
+      const user = await authAPI.login(email, password);
+      localStorage.setItem('adminAuth', 'true');
+      localStorage.setItem('adminUser', JSON.stringify(user));
+      toast.success('Login realizado com sucesso!');
+      navigate('/admin/dashboard');
+    } catch (error) {
+      const errorMsg = formatApiErrorDetail(error.response?.data?.detail) || error.message;
+      toast.error(errorMsg);
+    } finally {
       setIsLoading(false);
-    }, 800);
+    }
   };
 
   return (
