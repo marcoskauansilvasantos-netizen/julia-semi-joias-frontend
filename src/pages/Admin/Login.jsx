@@ -19,25 +19,25 @@ const AdminLogin = () => {
 
   try {
     const response = await fetch("https://web-production-d0d6.up.railway.app/api/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: e_mail,
-        password: senha,
-      }),
-    });
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    email: email,
+    password: password,
+  }),
+});
 
-    const data = await response.json();
+const data = await response.json();
 
-    if (response.ok) {
-      localStorage.setItem("token", data.access_token);
-      alert("Login feito!");
-      navegar("/admin/painel-de-controle");
-    } else {
-      alert("Email ou senha inválidos");
-    }
+if (response.ok) {
+  localStorage.setItem("token", data.access_token);
+  alert("Login feito!");
+  navegar("/admin/painel-de-controle");
+} else {
+  alert("Email ou senha inválidos");
+}
   } catch (err) {
     console.error(err);
     alert("Erro ao conectar com servidor");
@@ -76,7 +76,7 @@ const AdminLogin = () => {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <form onSubmit={handleLogin} className="login-form">
+            <form onSubmit={lidarComLogin} className="login-form">
               <div className="form-group">
                 <Label htmlFor="email">Email</Label>
                 <Input
