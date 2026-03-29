@@ -1,0 +1,1185 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --sage: #C4B5A0;
+    --taupe: #D4C4B0;
+    --chocolate: #6B4E37;
+    --charcoal: #2C2C2C;
+    --cream: #FAF9F7;
+    --soft-gray: #F5F3F0;
+    --warm-gray: #8B7D6B;
+    --rose-gold: #E8B4B8;
+    --gold: #D4AF37;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+        "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+        "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: var(--cream);
+    color: var(--charcoal);
+    line-height: 1.6;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+        monospace;
+}
+
+/* Header Styles */
+.header-julia {
+    background: var(--cream);
+    padding: 1rem 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(196, 181, 160, 0.2);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-julia {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--chocolate);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.logo-julia:hover {
+    color: var(--sage);
+}
+
+.contact-info-header {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.contact-link {
+    color: var(--warm-gray);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.contact-link:hover {
+    color: var(--chocolate);
+}
+
+/* Hero Section */
+.hero-julia {
+    background: linear-gradient(135deg, var(--cream) 0%, var(--soft-gray) 100%);
+    padding: 140px 20px 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-julia::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 100%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    font-weight: 600;
+    color: var(--charcoal);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.hero-subtitle {
+    font-size: 1.3rem;
+    color: var(--warm-gray);
+    margin-bottom: 2rem;
+    font-weight: 300;
+    animation: fadeInUp 1s ease-out;
+}
+
+.cta-primary-julia {
+    background: linear-gradient(135deg, var(--chocolate), var(--sage));
+    color: white;
+    padding: 18px 40px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 10px 30px rgba(107, 78, 55, 0.3);
+    animation: fadeInUp 1.2s ease-out;
+}
+
+.cta-primary-julia:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 40px rgba(107, 78, 55, 0.4);
+}
+
+.hero-image-container {
+    margin-top: 3rem;
+    animation: fadeInUp 1.4s ease-out;
+}
+
+.hero-image {
+    max-width: 500px;
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+}
+
+/* Container */
+.container-julia {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Section Title */
+.section-title-julia {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    text-align: center;
+    color: var(--charcoal);
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+.section-title-julia::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--sage), var(--rose-gold));
+}
+
+/* Benefits Section */
+.benefits-section {
+    padding: 80px 0;
+    background: white;
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.benefit-card-julia {
+    text-align: center;
+    padding: 2rem;
+    background: var(--soft-gray);
+    border-radius: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.benefit-card-julia:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.benefit-icon-julia {
+    color: var(--chocolate);
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.benefit-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--charcoal);
+    margin-bottom: 1rem;
+}
+
+.benefit-description {
+    color: var(--warm-gray);
+    font-size: 0.95rem;
+}
+
+/* Products Section */
+.products-section {
+    padding: 80px 0;
+    background: var(--cream);
+}
+
+.nova-colecao-section {
+    background: linear-gradient(135deg, var(--soft-gray) 0%, var(--cream) 100%);
+}
+
+.prata-section {
+    background: white;
+}
+
+.category-header-nova,
+.category-header-ouro,
+.category-header-prata {
+    text-align: center;
+    padding: 1.5rem;
+    border-radius: 15px;
+    margin-bottom: 2rem;
+}
+
+.category-header-nova {
+    background: linear-gradient(135deg, var(--chocolate), var(--sage));
+    color: white;
+}
+
+.category-header-ouro {
+    background: linear-gradient(135deg, var(--gold), var(--sage));
+    color: white;
+}
+
+.category-header-prata {
+    background: linear-gradient(135deg, var(--warm-gray), var(--taupe));
+    color: white;
+}
+
+.category-title-julia {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    margin: 0;
+}
+
+.new-collection-badge {
+    background: var(--rose-gold);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    display: inline-block;
+}
+
+.products-grid-julia {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+/* Product Card */
+.product-card-julia {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card-julia:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.product-image-container {
+    height: 250px;
+    position: relative;
+    overflow: hidden;
+}
+
+.product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.product-card-julia:hover .product-image {
+    transform: scale(1.05);
+}
+
+.discount-badge,
+.new-badge,
+.stock-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.discount-badge {
+    background: #e74c3c;
+    color: white;
+}
+
+.new-badge {
+    background: var(--rose-gold);
+    color: white;
+}
+
+.product-info-julia {
+    padding: 1.5rem;
+}
+
+.product-name-julia {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--charcoal);
+    margin-bottom: 1rem;
+}
+
+.product-price-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.current-price-julia {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--chocolate);
+}
+
+.original-price-julia {
+    font-size: 1rem;
+    color: var(--warm-gray);
+    text-decoration: line-through;
+}
+
+.cta-product-julia {
+    background: linear-gradient(135deg, var(--sage), var(--taupe));
+    color: var(--charcoal);
+    padding: 12px 20px;
+    border: none;
+    border-radius: 25px;
+    width: 100%;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+}
+
+.cta-product-julia:hover {
+    background: linear-gradient(135deg, var(--chocolate), var(--sage));
+    color: white;
+}
+
+/* Catalog Link */
+.catalog-cta-container {
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.catalog-link-button {
+    background: linear-gradient(135deg, var(--chocolate), var(--sage));
+    color: white;
+    padding: 18px 40px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 10px 30px rgba(107, 78, 55, 0.3);
+}
+
+.catalog-link-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 40px rgba(107, 78, 55, 0.4);
+}
+
+/* Testimonials */
+.testimonials-section {
+    padding: 80px 0;
+    background: white;
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.testimonial-card {
+    background: var(--soft-gray);
+    padding: 2rem;
+    border-radius: 20px;
+    text-align: center;
+    position: relative;
+}
+
+.testimonial-card::before {
+    content: '"';
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    font-size: 4rem;
+    color: var(--sage);
+    font-family: 'Playfair Display', serif;
+}
+
+.testimonial-text {
+    font-style: italic;
+    color: var(--charcoal);
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.testimonial-author {
+    color: var(--warm-gray);
+    font-weight: 500;
+}
+
+/* Trust Section */
+.trust-section {
+    padding: 80px 0;
+    background: var(--cream);
+}
+
+.trust-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.trust-item {
+    text-align: center;
+    padding: 1.5rem;
+}
+
+.trust-icon {
+    color: var(--chocolate);
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.trust-title {
+    font-family: 'Playfair Display', serif;
+    color: var(--charcoal);
+    margin-bottom: 0.5rem;
+}
+
+.trust-description {
+    color: var(--warm-gray);
+    font-size: 0.95rem;
+}
+
+/* Urgency Section */
+.urgency-section {
+    background: linear-gradient(135deg, var(--chocolate), var(--charcoal));
+    color: white;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.urgency-content {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.urgency-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.urgency-list {
+    list-style: none;
+    margin: 2rem 0;
+    padding: 0;
+}
+
+.urgency-list li {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.urgency-list li::before {
+    content: '⚡';
+    font-size: 1.2rem;
+}
+
+/* Final CTA */
+.final-cta-section {
+    padding: 80px 20px;
+    background: var(--soft-gray);
+    text-align: center;
+}
+
+.final-cta-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: var(--charcoal);
+    margin-bottom: 2rem;
+}
+
+.cta-whatsapp-julia {
+    background: #25D366;
+    color: white;
+    padding: 20px 50px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
+}
+
+.cta-whatsapp-julia:hover {
+    background: #20b358;
+    transform: translateY(-2px);
+    box-shadow: 0 15px 40px rgba(37, 211, 102, 0.4);
+}
+
+/* Footer */
+.footer-julia {
+    background: var(--charcoal);
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.footer-links {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.footer-link {
+    color: var(--sage);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.footer-link:hover {
+    color: white;
+}
+
+/* WhatsApp Float Button */
+.whatsapp-float {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #25D366;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    text-decoration: none;
+    box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
+    z-index: 1000;
+    transition: transform 0.3s ease, background 0.3s ease;
+    animation: pulse 2s infinite;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.whatsapp-float.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1);
+    background: #20b358;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(37, 211, 102, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Catalogo Page */
+.catalogo-page {
+    min-height: 100vh;
+}
+
+.catalogo-hero {
+    background: linear-gradient(135deg, var(--cream) 0%, var(--soft-gray) 100%);
+    padding: 140px 20px 60px;
+    text-align: center;
+}
+
+.catalogo-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    color: var(--charcoal);
+    margin-bottom: 1rem;
+}
+
+.catalogo-subtitle {
+    font-size: 1.2rem;
+    color: var(--warm-gray);
+}
+
+.catalogo-content {
+    padding: 60px 0;
+    background: white;
+}
+
+.catalogo-tabs {
+    width: 100%;
+}
+
+.tabs-list-julia {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+    background: transparent;
+}
+
+.tab-trigger-julia {
+    padding: 12px 24px;
+    background: var(--soft-gray);
+    border: none;
+    border-radius: 25px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+    color: var(--charcoal);
+}
+
+.tab-trigger-julia[data-state="active"] {
+    background: linear-gradient(135deg, var(--chocolate), var(--sage));
+    color: white;
+}
+
+.tab-content-container {
+    margin-top: 2rem;
+}
+
+.products-count {
+    text-align: center;
+    color: var(--warm-gray);
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+}
+
+/* Admin Login Page */
+.admin-login-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--cream) 0%, var(--soft-gray) 100%);
+    padding: 20px;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 400px;
+}
+
+.login-card {
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+}
+
+.login-header {
+    text-align: center;
+}
+
+.login-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--chocolate);
+}
+
+.login-description {
+    color: var(--warm-gray);
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.login-button {
+    background: linear-gradient(135deg, var(--chocolate), var(--sage));
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(107, 78, 55, 0.3);
+}
+
+.login-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.demo-credentials {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: var(--soft-gray);
+    border-radius: 8px;
+    text-align: center;
+}
+
+.demo-title {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--charcoal);
+}
+
+.demo-text {
+    font-size: 0.9rem;
+    color: var(--warm-gray);
+    margin: 0.25rem 0;
+}
+
+/* Admin Dashboard */
+.admin-dashboard {
+    min-height: 100vh;
+    background: var(--soft-gray);
+}
+
+.admin-header {
+    background: white;
+    border-bottom: 1px solid rgba(196, 181, 160, 0.2);
+    padding: 1.5rem 0;
+}
+
+.admin-header-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.admin-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--chocolate);
+    margin: 0;
+}
+
+.logout-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.admin-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem 20px;
+}
+
+.admin-actions {
+    margin-bottom: 2rem;
+}
+
+.add-product-button {
+    background: linear-gradient(135deg, var(--chocolate), var(--sage));
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.dialog-content-admin {
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.product-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.form-switches {
+    display: flex;
+    gap: 2rem;
+}
+
+.switch-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.submit-button {
+    background: linear-gradient(135deg, var(--chocolate), var(--sage));
+    color: white;
+}
+
+.products-tabs {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+}
+
+.tabs-list-admin {
+    display: flex;
+    justify-content: flex-start;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    background: transparent;
+    flex-wrap: wrap;
+}
+
+.tab-content-admin {
+    margin-top: 2rem;
+}
+
+.products-table-container {
+    width: 100%;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 3rem;
+    color: var(--warm-gray);
+}
+
+.products-grid-admin {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.product-card-admin {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card-admin:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.product-card-header {
+    padding: 0;
+}
+
+.product-image-admin {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.product-card-content {
+    padding: 1.5rem;
+}
+
+.product-name-admin {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.product-details {
+    margin-bottom: 1rem;
+}
+
+.product-category {
+    font-size: 0.85rem;
+    color: var(--warm-gray);
+    margin-bottom: 0.25rem;
+}
+
+.product-price-admin {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--chocolate);
+    margin-bottom: 0.5rem;
+}
+
+.promo-price-admin {
+    color: #e74c3c;
+    font-weight: 700;
+}
+
+.product-badges {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+}
+
+.badge-stock,
+.badge-out,
+.badge-featured {
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.badge-stock {
+    background: #d4edda;
+    color: #155724;
+}
+
+.badge-out {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.badge-featured {
+    background: var(--rose-gold);
+    color: white;
+}
+
+.product-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.action-button {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    font-size: 0.85rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .section-title-julia {
+        font-size: 2rem;
+    }
+    
+    .products-grid-julia {
+        grid-template-columns: 1fr;
+    }
+    
+    .nav-container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .contact-info-header {
+        font-size: 0.8rem;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .products-grid-admin {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-header-content {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-julia {
+        padding: 120px 15px 60px;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .cta-primary-julia {
+        padding: 15px 30px;
+        font-size: 1rem;
+    }
+    
+    .whatsapp-float {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+    }
+
+    .tabs-list-julia,
+    .tabs-list-admin {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
+
+@layer base {
+  :root {
+        --background: 0 0% 100%;
+        --foreground: 0 0% 3.9%;
+        --card: 0 0% 100%;
+        --card-foreground: 0 0% 3.9%;
+        --popover: 0 0% 100%;
+        --popover-foreground: 0 0% 3.9%;
+        --primary: 0 0% 9%;
+        --primary-foreground: 0 0% 98%;
+        --secondary: 0 0% 96.1%;
+        --secondary-foreground: 0 0% 9%;
+        --muted: 0 0% 96.1%;
+        --muted-foreground: 0 0% 45.1%;
+        --accent: 0 0% 96.1%;
+        --accent-foreground: 0 0% 9%;
+        --destructive: 0 84.2% 60.2%;
+        --destructive-foreground: 0 0% 98%;
+        --border: 0 0% 89.8%;
+        --input: 0 0% 89.8%;
+        --ring: 0 0% 3.9%;
+        --chart-1: 12 76% 61%;
+        --chart-2: 173 58% 39%;
+        --chart-3: 197 37% 24%;
+        --chart-4: 43 74% 66%;
+        --chart-5: 27 87% 67%;
+        --radius: 0.5rem;
+    }
+  .dark {
+        --background: 0 0% 3.9%;
+        --foreground: 0 0% 98%;
+        --card: 0 0% 3.9%;
+        --card-foreground: 0 0% 98%;
+        --popover: 0 0% 3.9%;
+        --popover-foreground: 0 0% 98%;
+        --primary: 0 0% 98%;
+        --primary-foreground: 0 0% 9%;
+        --secondary: 0 0% 14.9%;
+        --secondary-foreground: 0 0% 98%;
+        --muted: 0 0% 14.9%;
+        --muted-foreground: 0 0% 63.9%;
+        --accent: 0 0% 14.9%;
+        --accent-foreground: 0 0% 98%;
+        --destructive: 0 62.8% 30.6%;
+        --destructive-foreground: 0 0% 98%;
+        --border: 0 0% 14.9%;
+        --input: 0 0% 14.9%;
+        --ring: 0 0% 83.1%;
+        --chart-1: 220 70% 50%;
+        --chart-2: 160 60% 45%;
+        --chart-3: 30 80% 55%;
+        --chart-4: 280 65% 60%;
+        --chart-5: 340 75% 55%;
+    }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    }
+  body {
+    @apply bg-background text-foreground;
+    }
+}
