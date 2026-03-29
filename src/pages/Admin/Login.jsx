@@ -45,15 +45,6 @@ if (response.ok) {
     setIsLoading(false);
   }
 };
-
-    const data = await response.json();
-
-    if (response.ok) {
-      localStorage.setItem("token", data.access_token);
-      alert("Login feito!");
-      navegar("/admin/painel-de-controle");
-    } else {
-      alert("Email ou senha inválidos");
     }
   } catch (err) {
     console.error(err);
