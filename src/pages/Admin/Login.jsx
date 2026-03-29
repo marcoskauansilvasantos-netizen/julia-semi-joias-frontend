@@ -13,21 +13,38 @@ const AdminLogin = () => {
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    setIsLoading(true);
+  const lidarComLogin = async (e) => {
+  e.preventDefault();
+  setIsLoading(true);
 
-    try {
-      const user = await authAPI.login(email, password);
-      localStorage.setItem('adminAuth', 'true');
-      localStorage.setItem('adminUser', JSON.stringify(user));
-      toast.success('Login realizado com sucesso!');
-      navigate('/admin/dashboard');
-    } catch (error) {
-      const errorMsg = formatApiErrorDetail(error.response?.data?.detail) || error.message;
-      toast.error(errorMsg);
-    } finally {
-      setIsLoading(false);
+  try {
+    const response = await fetch("https://web-production-d0d6.up.railway.app/api/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: e_mail,
+        password: senha,
+      }),
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      localStorage.setItem("token", data.access_token);
+      alert("Login feito!");
+      navegar("/admin/painel-de-controle");
+    } else {
+      alert("Email ou senha inválidos");
+    }
+  } catch (err) {
+    console.error(err);
+    alert("Erro ao conectar com servidor");
+  } finally {
+    setIsLoading(false);
+  }
+};
     }
   };
 
